@@ -1,37 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push.c                                             :+:      :+:    :+:   */
+/*   call_function.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barnaud <barnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 10:47:17 by barnaud           #+#    #+#             */
-/*   Updated: 2025/02/25 10:47:18 by barnaud          ###   ########.fr       */
+/*   Created: 2025/02/25 12:30:25 by barnaud           #+#    #+#             */
+/*   Updated: 2025/02/25 12:36:17 by barnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static void	push(t_stack **src, t_stack **dest)
+void	call_function(t_stack *stack_a, t_stack *stack_b, int stack_size)
 {
-	t_stack	*tmp;
-
-	if (*src == NULL)
-		return ;
-	tmp = (*src)->next;
-	(*src)->next = *dest;
-	*dest = *src;
-	*src = tmp;
-}
-
-void	do_pa(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_b, stack_a);
-	ft_putstr("pa\n");
-}
-
-void	do_pb(t_stack **stack_a, t_stack **stack_b)
-{
-	push(stack_a, stack_b);
-	ft_putstr("pb\n");
+	get_index(stack_a, stack_size + 1);
+	push_swap(&stack_a, &stack_b, stack_size);
+	free_stack(&stack_a);
+	free_stack(&stack_b);
 }

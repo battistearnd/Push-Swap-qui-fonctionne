@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_arg.c                                        :+:      :+:    :+:   */
+/*   parsing_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: barnaud <barnaud@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/25 10:46:46 by barnaud           #+#    #+#             */
-/*   Updated: 2025/02/25 12:29:23 by barnaud          ###   ########.fr       */
+/*   Created: 2025/02/25 11:55:16 by barnaud           #+#    #+#             */
+/*   Updated: 2025/02/25 12:35:38 by barnaud          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	arg_is_number(char *av)
+static int	number_split(char *av)
 {
 	int	i;
 
@@ -26,7 +26,7 @@ static int	arg_is_number(char *av)
 	return (1);
 }
 
-static int	check_double(char **av)
+static int	double_split(char **av)
 {
 	int	i;
 	int	j;
@@ -46,7 +46,7 @@ static int	check_double(char **av)
 	return (0);
 }
 
-static int	double_zero(char *av)
+static int	zero_split(char *av)
 {
 	int	i;
 
@@ -60,23 +60,23 @@ static int	double_zero(char *av)
 	return (1);
 }
 
-int	is_correct_input(char **av)
+int	good_split(char **av)
 {
 	int	i;
 	int	nb_zeros;
 
 	nb_zeros = 0;
-	i = 1;
+	i = 0;
 	while (av[i])
 	{
-		if (!arg_is_number(av[i]))
+		if (!number_split(av[i]))
 			return (0);
-		nb_zeros += double_zero(av[i]);
+		nb_zeros += zero_split(av[i]);
 		i++;
 	}
 	if (nb_zeros > 1)
 		return (0);
-	if (check_double(av))
+	if (double_split(av))
 		return (0);
 	return (1);
 }

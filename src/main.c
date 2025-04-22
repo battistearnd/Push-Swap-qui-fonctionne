@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: barnaud <barnaud@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 10:47:11 by barnaud           #+#    #+#             */
+/*   Updated: 2025/03/13 10:54:05 by barnaud          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 int	is_sorted(t_stack *stack)
@@ -11,7 +23,7 @@ int	is_sorted(t_stack *stack)
 	return (1);
 }
 
-static void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
+void	push_swap(t_stack **stack_a, t_stack **stack_b, int stack_size)
 {
 	if (stack_size == 2 && !is_sorted(*stack_a))
 		do_sa(stack_a);
@@ -26,17 +38,26 @@ int	main(int ac, char **av)
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 	int		stack_size;
+	char	**result;
 
 	if (ac < 2)
 		return (0);
-	if (!is_correct_input(av))
-		send_error(NULL, NULL);
+	if (ac == 2)
+	{
+		result = ft_split(av[1], ' ');
+		if (!good_split(result))
+			send_error_split(result);
+		stack_a = split_init(result);
+		free_if_error(result);
+	}
+	else
+	{
+		if (!is_correct_input(av))
+			send_error(NULL, NULL);
+		stack_a = init(ac, av);
+	}
 	stack_b = NULL;
-	stack_a = init(ac, av);
 	stack_size = stack_len(stack_a);
-	get_index(stack_a, stack_size + 1);
-	push_swap(&stack_a, &stack_b, stack_size);
-	free_stack(&stack_a);
-	free_stack(&stack_b);
+	call_function(stack_a, stack_b, stack_size);
 	return (0);
 }

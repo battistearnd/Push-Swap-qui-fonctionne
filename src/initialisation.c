@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialisation.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: barnaud <barnaud@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/25 10:47:07 by barnaud           #+#    #+#             */
+/*   Updated: 2025/02/25 12:13:18 by barnaud          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 t_stack	*init(int ac, char **av)
@@ -50,4 +62,14 @@ void	get_index(t_stack *stack_a, int stack_size)
 		if (highest != NULL)
 			highest->index = stack_size;
 	}
+}
+
+int	ft_strlen(const char *s)
+{
+	int	len;
+
+	len = 0;
+	while (s[len])
+		len++;
+	return (len);
 }
